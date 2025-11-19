@@ -1,1 +1,130 @@
+#include <stdio.h>
 
+/*
+====================================================
+ FUNÇÕES RECURSIVAS – TORRE, BISPO E RAINHA
+====================================================
+ Cada função recebe a quantidade de casas a percorrer.
+ Em cada chamada recursiva, imprimimos o movimento
+ e chamamos novamente até acabar.
+*/
+
+// ------------------------ TORRE (recursiva)
+void moverTorre(int casas) {
+    if (casas == 0) {
+        return; // condição de parada
+    }
+
+    printf("Direita\n");
+    moverTorre(casas - 1);
+}
+
+// ------------------------ BISPO (recursivo + loops aninhados)
+void moverBispoRecursivo(int casas) {
+    if (casas == 0) {
+        return; // condição de parada
+    }
+
+    /* 
+       Exigência nova:
+       O bispo deve usar TAMBÉM loops aninhados:
+       - loop externo: movimento vertical (CIMA)
+       - loop interno: movimento horizontal (DIREITA)
+    */
+    for (int v = 0; v < 1; v++) {     // controla movimento vertical
+        for (int h = 0; h < 1; h++) { // controla movimento horizontal
+            printf("Cima Direita\n");
+        }
+    }
+
+    moverBispoRecursivo(casas - 1);
+}
+
+// ------------------------ RAINHA (recursiva)
+void moverRainha(int casas) {
+    if (casas == 0) {
+        return; // condição de parada
+    }
+
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
+
+
+
+/*
+====================================================
+  MOVIMENTO DO CAVALO – LOOPS ANINHADOS COMPLEXOS
+====================================================
+ O cavalo deve se mover:
+  - 2 casas para CIMA
+  - 1 casa para DIREITA
+
+ Requisitos:
+  - loops aninhados
+  - múltiplas variáveis e/ou condições
+  - uso de break e continue
+*/
+void moverCavalo() {
+
+    int movCima = 2;
+    int movDireita = 1;
+
+    printf("\nMovimento do CAVALO:\n");
+
+    // Loop externo controla o movimento vertical
+    for (int i = 0; i < movCima; i++) {
+
+        // Controle adicional apenas ilustrativo (exigência de múltiplas condições)
+        if (i < 0) { // nunca entra, apenas demonstra controle
+            continue;
+        }
+
+        printf("Cima\n");
+
+        // Loop interno controla o movimento horizontal (1 casa)
+        for (int j = 0; j < movDireita + 1; j++) {
+
+            // Exigência: múltiplas condições + continue/break
+            if (j == 0) {
+                continue;   // ignora a primeira iteração propositalmente
+            }
+
+            if (j > 1) {
+                break;      // evita movimentos extras
+            }
+
+            // Movimento real do cavalo
+            printf("Direita\n");
+        }
+    }
+}
+
+
+
+/*
+====================================================
+                      MAIN
+====================================================
+*/
+
+int main() {
+
+    // Valores definidos diretamente no código
+    int casasTorre = 5;
+    int casasBispo = 5;
+    int casasRainha = 8;
+
+    printf("Movimento da TORRE:\n");
+    moverTorre(casasTorre);
+
+    printf("\nMovimento do BISPO:\n");
+    moverBispoRecursivo(casasBispo);
+
+    printf("\nMovimento da RAINHA:\n");
+    moverRainha(casasRainha);
+
+    moverCavalo(); // já imprime linha separadora internamente
+
+    return 0;
+}
